@@ -58,6 +58,7 @@ const posts = [
 ]
 
 // authenticateToken is a middleware which will be used first
+// middleware will put req.user in request.
 
 app.get("/posts", authenticateToken, (req, res) => {
     // user is an object
@@ -67,20 +68,20 @@ app.get("/posts", authenticateToken, (req, res) => {
 
 // remember to put application/json in POSTMAN instead of text
 
-app.post('/login', (req,res) => {
-    // Authenticate User
+// app.post('/login', (req,res) => {
+//     // Authenticate User Module
 
-    const username = req.body.username;
-    // sign takes user object
-    const user = { name : username };
+//     const username = req.body.username;
+//     // sign takes user object
+//     const user = { name : username };
 
-    // secret key can be generated using crypto library in node.
-    // require('crypto').randomBytes(64).toString('hex') do in REPL
-    // for now AdityaBapat777 taken secret key
-    const accessToken = jwt.sign( user, process.env.ACCESS_TOKEN_SECRET);
+//     // secret key can be generated using crypto library in node.
+//     // require('crypto').randomBytes(64).toString('hex') do in REPL
+//     // for now AdityaBapat777 taken secret key
+//     const accessToken = jwt.sign( user, process.env.ACCESS_TOKEN_SECRET);
 
-    res.json({ accessToken: accessToken});
-})
+//     res.json({ accessToken: accessToken});
+// })
 
 
 // after running post request in postman we get access token
@@ -95,7 +96,7 @@ function authenticateToken(req, res, next){
     // above access token will be in header
     const authHeader = req.headers['authorization'];
     
-    // format will be Bearer <Token Value>
+    // format will be Bearer <Token Value>, you will do in Authentication header
     // we need to get the token by splitting 
 
     // if authHeader exists then take the token value
